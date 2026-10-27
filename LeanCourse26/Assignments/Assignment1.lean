@@ -43,7 +43,7 @@ your proof is finished.
 -/
 
 example (a b : ℝ) : (a+b)^2 = a^2 + 2*a*b + b^2 := by
-  sorry
+  ring
 
 /- In the first example above, take a closer look at where Lean displays parentheses.
 The `ring` tactic certainly knows about associativity of multiplication, but sometimes
@@ -90,7 +90,9 @@ but it doesn't use the assumptions `h` and `h'`
 -/
 
 example (a b c d : ℝ) (h : b = d + d) (h' : a = b + c) : a + b = c + 4 * d := by
-  sorry
+  rw [h']
+  rw [h]
+  ring
 
 /- ## Rewriting with a lemma
 
@@ -127,7 +129,10 @@ right-hand side.
 -/
 
 example (a b c : ℝ) : exp (a + b - c) = (exp a * exp b) / (exp c * exp 0) := by
-  sorry
+  rw [exp_sub]
+  rw [exp_add]
+  rw [exp_zero]
+  rw [mul_one]
 
 
 /- Prove the following equality just by using `rw`.
@@ -137,7 +142,11 @@ The two lemmas below express the associativity and commutativity of multiplicati
 #check (mul_comm : ∀ a b : ℝ, a * b = b * a)
 
 example (a b c : ℝ) : a * b * c = b * (a * c) := by
-  sorry
+  rw [mul_assoc]
+  rw [mul_comm]
+  rw [mul_assoc]
+  rw [mul_comm a]
+
 
 
 

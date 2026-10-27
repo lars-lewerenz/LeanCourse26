@@ -5,3 +5,7 @@ import Mathlib.Tactic
 #eval 2 ^ 5
 
 example (x : ℝ) : x - x = 0 := by simp
+
+#eval 2 + 4
+
+#eval 2 ^ 2 + (9)
