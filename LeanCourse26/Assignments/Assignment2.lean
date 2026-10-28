@@ -41,7 +41,12 @@ example {α : Type*} {p q : α → Prop} (h : ∀ x, p x → q x) :
 
 -- Exercise: prove this by contraposition.
 example : 2 ≠ 4 → 1 ≠ 2 := by
-  sorry
+  contrapose
+  intro hp
+  calc
+    2 = 2 * 1 := by rw [mul_one]
+    _ = 2 * 2 := by rw [hp]
+    _ = 4 := by rw [mul_two]
 
 /- Prove the following with basic tactics,
 in particular without using `tauto`, `grind` or lemmas from Mathlib. -/
