@@ -20,11 +20,24 @@ open Real Function Set Nat
 /-! # Exercises to practice. -/
 
 example (p q r s : Prop) (h : p ∧ q → r) (hp : p) (h' : q → s) : q → r ∧ s := by
-  sorry
+  intro hq
+  constructor
+  · apply h
+    constructor
+    · apply hp
+    · apply hq
+  · apply h'
+    exact hq
+
 
 example {α : Type*} {p q : α → Prop} (h : ∀ x, p x → q x) :
     (∃ x, p x) → (∃ x, q x) := by
-  sorry
+  intro hex
+  obtain ⟨x, hx⟩ := hex
+  use x
+  apply h
+  use hx
+
 
 -- Exercise: prove this by contraposition.
 example : 2 ≠ 4 → 1 ≠ 2 := by
