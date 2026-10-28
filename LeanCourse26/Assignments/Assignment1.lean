@@ -170,15 +170,11 @@ open scoped commutatorElement
 #check inv_inv g
 
 lemma inverse_of_a_commutator : ⁅g, h⁆⁻¹ = ⁅h, g⁆ := by
-  rw [commutatorElement_def]
-  rw [commutatorElement_def]
+  rw [commutatorElement_def, commutatorElement_def]
+  rw [mul_inv_rev, mul_inv_rev]
+  rw [inv_inv, inv_inv]
   rw [mul_inv_rev]
-  rw [mul_inv_rev]
-  rw [inv_inv]
-  rw [inv_inv]
-  rw [mul_inv_rev]
-  rw [mul_assoc]
-  rw [mul_assoc]
+  rw [mul_assoc, mul_assoc]
 
 
 end
