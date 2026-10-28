@@ -175,11 +175,14 @@ def Continuous' (f : ℝ → ℝ) := ∀ x, ContinuousAtPoint f x
 -- Exercise for you. Remember that you can use `unfold` to expand a definition.
 example (f g : ℝ → ℝ) (hfg : ∀ x, ContinuousAtPoint f x ↔ ContinuousAtPoint g x) :
     Continuous' f ↔ Continuous' g := by
-  constructor
-  · intro h
-    sorry
-  · intro h
-    sorry
+    unfold Continuous'
+    constructor
+    · intro hf x
+      apply (hfg x).1
+      apply hf
+    · intro hg x
+      apply (hfg x).2
+      apply hg
 
 def All (p : ℝ → Prop) := ∀ x, p x
 
