@@ -200,10 +200,10 @@ In the case of ←, you can type it by typing "\l ", so backslash-l-space.
 -/
 
 example (a b c d : ℝ) (h : a = b + b) (h' : b = c) (h'' : a = d) : b + c = d := by
-  sorry
+  rw [← h', ← h, h'']
 
 example (a b c d : ℝ) (h : a*d - 1 = c) (h' : a*d = b) : c = b - 1 := by
-  sorry
+  rw [← h', ← h]
 
 /- ## Rewriting in a local assumption
 
