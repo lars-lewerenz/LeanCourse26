@@ -175,17 +175,29 @@ def Continuous' (f : ℝ → ℝ) := ∀ x, ContinuousAtPoint f x
 -- Exercise for you. Remember that you can use `unfold` to expand a definition.
 example (f g : ℝ → ℝ) (hfg : ∀ x, ContinuousAtPoint f x ↔ ContinuousAtPoint g x) :
     Continuous' f ↔ Continuous' g := by
-  sorry
+  constructor
+  · intro h
+    sorry
+  · intro h
+    sorry
 
 def All (p : ℝ → Prop) := ∀ x, p x
 
 example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     All p ↔ All q := by
-  sorry
+  constructor
+  · intro h
+    sorry
+  · intro h
+    sorry
 
 example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     (∃ x, p x) ↔ (∃ x, q x) := by
-  sorry
+  constructor
+  · intro h
+    sorry
+  · intro h
+    sorry
 
 -- Is the following true? If yes, prove it in Lean.
 -- If not, give a counterexample and prove it. (What do you have to do to do so?)
@@ -197,7 +209,11 @@ example (p q : ℕ → Prop) (h: (∃ x, p x) ↔ (∃ x, q x)) : ∀ x, p x ↔
 /- Prove the following with basic tactics, without using `tauto` or lemmas from Mathlib. -/
 lemma exists_distributes_over_or {α : Type*} {p q : α → Prop} :
     (∃ x, p x ∨ q x) ↔ (∃ x, p x) ∨ (∃ x, q x) := by
-  sorry
+  constructor
+  · intro h
+    sorry
+  · intro h
+    sorry
 
 end Logic
 
