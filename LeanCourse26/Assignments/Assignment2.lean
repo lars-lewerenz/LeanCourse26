@@ -85,7 +85,13 @@ example {α : Type*} {p : α → Prop} {r : Prop} :
 /- Prove the following without using `push_neg` or lemmas from Mathlib.
 You will need to use `by_contra` in the proof. -/
 example {α : Type*} (p : α → Prop) : (∃ x, p x) ↔ (¬ ∀ x, ¬ p x) := by
-  sorry
+  constructor
+  · intro h
+    obtain ⟨x, hx⟩  := h
+
+    sorry
+  · intro h
+    sorry
 
 def SequentialLimit (u : ℕ → ℝ) (l : ℝ) : Prop :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |u n - l| < ε
