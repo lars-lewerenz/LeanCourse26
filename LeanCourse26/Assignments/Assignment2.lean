@@ -52,7 +52,18 @@ example : 2 ≠ 4 → 1 ≠ 2 := by
 in particular without using `tauto`, `grind` or lemmas from Mathlib. -/
 example {α : Type*} {p : α → Prop} {r : Prop} :
     ((∃ x, p x) → r) ↔ (∀ x, p x → r) := by
-  sorry
+  constructor
+  · intro h
+    intro x
+    intro hx
+    apply h
+    use x, hx
+  · intro h
+    intro hex
+    obtain ⟨x, hx⟩ := hex
+    apply h x
+    apply hx
+
 
 
 /- Prove the following with basic tactics,
