@@ -188,11 +188,16 @@ def All (p : ℝ → Prop) := ∀ x, p x
 
 example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     All p ↔ All q := by
+  unfold All
   constructor
-  · intro h
-    sorry
-  · intro h
-    sorry
+  · intro hp
+    intro x
+    apply (h x).1
+    apply hp
+  · intro hq
+    intro x
+    apply (h x).2
+    apply hq
 
 example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     (∃ x, p x) ↔ (∃ x, q x) := by
