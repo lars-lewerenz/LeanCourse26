@@ -244,7 +244,7 @@ Let's do some exercises using `calc`. Feel free to use `ring` in some steps.
 
 example (a b c : ℝ) (h : a = b + c) : exp (2 * a) = (exp b) ^ 2 * (exp c) ^ 2 := by
   calc
-    exp (2 * a) = exp (2 * (b + c))                 := by sorry
+    exp (2 * a) = exp (2 * (b + c))                 := by rw [h]
               _ = exp ((b + b) + (c + c))           := by sorry
               _ = exp (b + b) * exp (c + c)         := by sorry
               _ = (exp b * exp b) * (exp c * exp c) := by sorry
@@ -263,7 +263,10 @@ Aligning the equal signs and `:=` signs is not necessary but looks tidy.
 
 /- Prove the following using a `calc` block. -/
 example (a b c d : ℝ) (h : c = a * d + b) (h' : b = a * d) : c = 2 * d * a := by
-  sorry
+  calc
+    c = a * d + b := by rw[h]
+    _ = a * d + a * d := by rw[h']
+    _ = 2 * d * a := by ring
 
 
 
