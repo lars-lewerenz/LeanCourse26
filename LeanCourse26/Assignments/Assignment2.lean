@@ -70,7 +70,16 @@ example {α : Type*} {p : α → Prop} {r : Prop} :
 in particular without using `tauto`, `grind` or lemmas from Mathlib. -/
 example {α : Type*} {p : α → Prop} {r : Prop} :
     (∃ x, p x ∧ r) ↔ ((∃ x, p x) ∧ r) := by
-  sorry
+  constructor
+  · intro h
+    obtain ⟨x, ⟨hpx, hr⟩⟩ := h
+    constructor
+    · use x
+    . apply hr
+  · intro h
+    obtain ⟨⟨x, hx⟩ , hr⟩ := h
+    use x
+
 
 
 /- Prove the following without using `push_neg` or lemmas from Mathlib.
