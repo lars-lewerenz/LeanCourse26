@@ -245,10 +245,12 @@ Let's do some exercises using `calc`. Feel free to use `ring` in some steps.
 example (a b c : ℝ) (h : a = b + c) : exp (2 * a) = (exp b) ^ 2 * (exp c) ^ 2 := by
   calc
     exp (2 * a) = exp (2 * (b + c))                 := by rw [h]
-              _ = exp ((b + b) + (c + c))           := by sorry
-              _ = exp (b + b) * exp (c + c)         := by sorry
-              _ = (exp b * exp b) * (exp c * exp c) := by sorry
-              _ = (exp b) ^ 2 * (exp c)^2           := by sorry
+              _ = exp ((b + b) + (c + c))           := by
+                                                        rw [mul_add]
+                                                        rw [two_mul, two_mul]
+              _ = exp (b + b) * exp (c + c)         := by rw [exp_add]
+              _ = (exp b * exp b) * (exp c * exp c) := by rw [exp_add, exp_add]
+              _ = (exp b) ^ 2 * (exp c)^2           := by rw [pow_two, pow_two]
 
 /-
 From a practical point of view, when writing such a proof, it is sometimes convenient to:
@@ -273,7 +275,9 @@ example (a b c d : ℝ) (h : c = a * d + b) (h' : b = a * d) : c = 2 * d * a := 
 /- Prove the following using a `calc` block. -/
 
 example (a b c d : ℝ) : a + b + c + d = d + (b + a) + c := by
-  sorry
+  calc
+    a + b + c + d = d + b + a + c := by ring
+    _ = d + (b + a) + c := by rw [add_assoc]
 
 /- Prove the following using a `calc` block. -/
 
