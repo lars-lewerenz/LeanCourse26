@@ -1,4 +1,4 @@
--- Name: <insert your name here>
+-- Name: Lars Lewerenz
 import Mathlib.Analysis.Complex.Exponential
 import Mathlib.FieldTheory.Finite.Basic
 
