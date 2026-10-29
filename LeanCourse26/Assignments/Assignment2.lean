@@ -241,9 +241,22 @@ lemma exists_distributes_over_or {α : Type*} {p q : α → Prop} :
     (∃ x, p x ∨ q x) ↔ (∃ x, p x) ∨ (∃ x, q x) := by
   constructor
   · intro h
-    sorry
+    obtain ⟨x, hx⟩ := h
+    obtain hpx | hqx := hx
+    · left
+      use x, hpx
+    · right
+      use x, hqx
   · intro h
-    sorry
+    obtain hp | hq := h
+    · obtain ⟨xp, hpx⟩ := hp
+      use xp
+      · left
+        exact hpx
+    · obtain ⟨xq, hqx⟩ := hq
+      use xq
+      · right
+        exact hqx
 
 end Logic
 
