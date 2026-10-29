@@ -371,7 +371,12 @@ def EventuallyGrowsFaster (s t : ℕ → ℕ) : Prop :=
 /- show that `n * s n` grows (eventually) faster than `s n`. -/
 lemma eventuallyGrowsFaster_mul_left :
     EventuallyGrowsFaster (fun n ↦ n * s n) s := by
-  sorry
+  intro h
+  use h
+  intro n₀ hn
+  simp
+  exact Nat.mul_le_mul_right (s n₀) hn
+
 
 /- Show that if `sᵢ` grows eventually faster than `tᵢ` then
 `s₁ + s₂` grows eventually faster than `t₁ + t₂`. -/
