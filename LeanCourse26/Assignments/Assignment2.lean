@@ -271,7 +271,7 @@ section Functions
 -- (You have not seen the syntax `[hp: Fact (Nat.Prime p)]` yet:
 -- this is related to implicit arguments.
 -- You can assume it says `(hp: Nat.Prime p)`. We will discuss the precise difference later.)
---
+
 -- Use `exact?`, `apply?` or `#click_suggestions` to find this theorem in Mathlib.
 -- Describe what you are doing.
 example (p : ℕ) [hp: Fact (Nat.Prime p)] (x : ZMod p) : x ^ p = x := by
@@ -280,9 +280,9 @@ example (p : ℕ) [hp: Fact (Nat.Prime p)] (x : ZMod p) : x ^ p = x := by
   -- exact? lead to: exact ZMod.pow_card x
   apply ZMod.pow_card
 
--- The above theorem has a name. What is it?
+-- The above theorem has a name. What is it? -> Fermat's little theorem
 -- Use this name to find the same result using leansearch.net.
--- Describe every step you're performing.
+-- Describe every step you're performing. -> copied x ^ p = x and pasted it on leansearch.net
 
 -- We go to the definition of `ZMod.pow_card`: hover over the theorem,
 -- right-click and select "Go to definition".
@@ -297,16 +297,21 @@ example (p : ℕ) [hp: Fact (Nat.Prime p)] (x : ZMod p) : x ^ p = x := by
 
 -- Use `exact?` to find the following theorem in Mathlib.
 example (p : ℕ) [hp: Fact (Nat.Prime p)] (k : ZMod p) (hk : k ≠ 0) : k ^ (p - 1) = 1 := by
-  sorry
+  exact ZMod.pow_card_sub_one_eq_one hk
 
 -- Prove the following.
 example (p : ℕ) [Fact (Nat.Prime p)] :
     (fun x ↦ x ^ p + 2 * x ^ (2 * (p - 1) + 1) : ZMod p → ZMod p) = (fun x ↦ 3 * x) := by
-  sorry
+  ext x
+  by_cases hx : x = 0
+  · rw [hx]; simp
+  · rw [ZMod.pow_card, pow_succ, pow_mul', ZMod.pow_card_sub_one_eq_one hx, one_pow]; ring
 
 -- Prove the following.
 example (p : ℕ) [Fact (Nat.Prime p)] (k : ZMod p) : k ^ (3 * (p - 1) + 1) = k := by
-  sorry
+  by_cases hk : k = 0
+  · rw [pow_succ, pow_mul', hk]; ring
+  · rw [pow_succ, pow_mul', ZMod.pow_card_sub_one_eq_one hk, one_pow, one_mul]
 
 example (p : ℕ) [Fact (Nat.Prime p)] (k : ZMod p) : k ^ (5 * (p - 1) + 1) = k := by
   sorry
@@ -318,7 +323,7 @@ end Functions
 lemma sequentialLimit_add {s t : ℕ → ℝ} {a b : ℝ}
       (hs : SequentialLimit s a) (ht : SequentialLimit t b) :
     SequentialLimit (fun n ↦ s n + t n) (a + b) := by
-  sorry
+
 
 /- It may be useful to case split on whether `c = 0` is true. -/
 lemma sequentialLimit_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (hs : SequentialLimit s a) :
