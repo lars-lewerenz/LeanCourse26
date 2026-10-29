@@ -190,12 +190,10 @@ example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     All p ↔ All q := by
   unfold All
   constructor
-  · intro hp
-    intro x
+  · intro hp x
     apply (h x).1
     apply hp
-  · intro hq
-    intro x
+  · intro hq x
     apply (h x).2
     apply hq
 
