@@ -313,8 +313,11 @@ example (p : ℕ) [Fact (Nat.Prime p)] (k : ZMod p) : k ^ (3 * (p - 1) + 1) = k 
   · rw [pow_succ, pow_mul', hk]; ring
   · rw [pow_succ, pow_mul', ZMod.pow_card_sub_one_eq_one hk, one_pow, one_mul]
 
+-- same as above
 example (p : ℕ) [Fact (Nat.Prime p)] (k : ZMod p) : k ^ (5 * (p - 1) + 1) = k := by
-  sorry
+  by_cases hk : k = 0
+  · rw [pow_succ, pow_mul', hk]; ring
+  · rw [pow_succ, pow_mul', ZMod.pow_card_sub_one_eq_one hk, one_pow, one_mul]
 
 end Functions
 
@@ -323,6 +326,18 @@ end Functions
 lemma sequentialLimit_add {s t : ℕ → ℝ} {a b : ℝ}
       (hs : SequentialLimit s a) (ht : SequentialLimit t b) :
     SequentialLimit (fun n ↦ s n + t n) (a + b) := by
+  intro ε hε
+  obtain ⟨N, hN⟩ := hs (ε / 2) (by linarith)
+  obtain ⟨M, hM⟩ := ht (ε / 2) (by linarith)
+  let N₀ := max N M
+  use N₀
+  intro n h
+  specialize hN n (by exact le_of_max_le_left h)
+  specialize hM n (by exact le_of_max_le_right h)
+  calc |s n + t n - (a + b)| = |(s n - a) + (t n - b)| := by ring_nf
+    _ ≤ |s n - a| + |t n - b| := by exact abs_add_le (s n - a) (t n - b)
+    _ < ε / 2 + ε / 2 := by exact _root_.add_lt_add hN hM
+    _ = ε := by ring
 
 
 /- It may be useful to case split on whether `c = 0` is true. -/
