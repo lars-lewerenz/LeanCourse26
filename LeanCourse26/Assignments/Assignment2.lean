@@ -200,15 +200,39 @@ example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
 example (p q : ℝ → Prop) (h : ∀ x, p x ↔ q x) :
     (∃ x, p x) ↔ (∃ x, q x) := by
   constructor
-  · intro h
-    sorry
-  · intro h
-    sorry
+  · intro hp
+    obtain ⟨x, hx⟩ := hp
+    use x
+    apply (h x).1
+    exact hx
+  · intro hq
+    obtain ⟨x, hx⟩ := hq
+    use x
+    apply (h x).2
+    exact hx
 
 -- Is the following true? If yes, prove it in Lean.
 -- If not, give a counterexample and prove it. (What do you have to do to do so?)
-example (p q : ℕ → Prop) (h: (∃ x, p x) ↔ (∃ x, q x)) : ∀ x, p x ↔ q x := by
-  sorry
+-- Answer: false! Counterexample: p x := (x = 2), q x := (x = 4), obv there exist x = 2 that
+-- satisfies p, and x = 4 that satisfies q.
+-- But there is 2 ∈ ℕ such that (2 = 2 is True and 2 = 4 is False).
+
+-- example (p q : ℕ → Prop) (h: (∃ x, p x) ↔ (∃ y, q y)) : ∀ x, p x ↔ q x := by
+--   sorry
+
+example : ¬ (∀ p q : ℕ → Prop, ((∃ x, p x) ↔ (∃ y, q y)) → (∀ x, p x ↔ q x)) := by
+  intro h
+  specialize h (fun x ↦ x = 2) (fun y ↦ y = 4)
+  have hiff : (∃ x, x = 2) ↔ (∃ y, y = 4) := by
+    constructor
+    · intro hx; use 4
+    · intro hy; use 2
+
+  specialize h hiff
+  specialize h 2
+  have h24 : 2 = 4 := by
+    apply h.1; rfl
+  norm_num at h24
 
 
 
