@@ -347,7 +347,11 @@ lemma sequentialLimit_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (hs : Sequ
 
 /-- Prove this using a calculation. -/
 lemma exercise_square {m n k : ℤ} (h : m ^ 2 + n ≤ 2) : n + 1 ≤ 3 + k ^ 2 := by
-  sorry
+  have hm : m ^ 2 ≥ 0 := sq_nonneg m
+  have hk : k ^ 2 ≥ 0 := sq_nonneg k
+  calc n + 1 ≤ 3 - m ^ 2 := by linarith
+    _ ≤ 3 := by linarith
+    _ ≤ 3 + k ^ 2 := by linarith
 
 
 section Growth
