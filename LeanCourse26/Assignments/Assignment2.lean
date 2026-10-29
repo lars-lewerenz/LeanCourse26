@@ -378,7 +378,16 @@ lemma eventuallyGrowsFaster_mul_left :
 lemma eventuallyGrowsFaster_add {s₁ s₂ t₁ t₂ : ℕ → ℕ}
     (h₁ : EventuallyGrowsFaster s₁ t₁) (h₂ : EventuallyGrowsFaster s₂ t₂) :
     EventuallyGrowsFaster (s₁ + s₂) (t₁ + t₂) := by
-  sorry
+  intro k
+  obtain ⟨N, hN⟩ := h₁ k
+  obtain ⟨M, hM⟩ := h₂ k
+  let N₀ := max N M
+  use N₀
+  intro n h
+  specialize hN n (by exact le_of_max_le_left h)
+  specialize hM n (by exact le_of_max_le_right h)
+  simp
+  linarith
 
 /- Find a positive function that grows faster than itself when shifted by one. -/
 lemma eventuallyGrowsFaster_shift : ∃ (s : ℕ → ℕ),
