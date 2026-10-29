@@ -275,7 +275,10 @@ section Functions
 -- Use `exact?`, `apply?` or `#click_suggestions` to find this theorem in Mathlib.
 -- Describe what you are doing.
 example (p : ℕ) [hp: Fact (Nat.Prime p)] (x : ZMod p) : x ^ p = x := by
-  sorry
+  -- apply? lead to: exact ZMod.pow_card x
+  -- shift + click on the equation, then first result: apply ZMod.pow_card
+  -- exact? lead to: exact ZMod.pow_card x
+  apply ZMod.pow_card
 
 -- The above theorem has a name. What is it?
 -- Use this name to find the same result using leansearch.net.
