@@ -283,7 +283,14 @@ example (f : α → β) (s : Set α) : f '' s = { y : β | ∃ x ∈ s, f x = y 
 
 
 example {s : Set α} {t : Set β} {f : α → β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t := by
-  sorry
+  constructor
+  · rw [image_subset_iff]
+    intro h
+    exact h
+  · simp only [image_subset_iff, imp_self]
+
+example {s : Set α} {t : Set β} {f : α → β} : f '' s ⊆ t ↔ s ⊆ f ⁻¹' t := by
+  exact image_subset_iff
 
 
 /- We can do pointwise operations on sets (e.g. the Minkowski sum). -/
@@ -445,4 +452,3 @@ example (n m : ℕ) (h : n = m * m + 2) :
     (n : ℝ) - 3 = (m + 1) * (m - 1) := by
   sorry
   done
-
