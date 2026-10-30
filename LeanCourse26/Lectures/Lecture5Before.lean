@@ -44,18 +44,22 @@ that they are equal at every point, using the `ext` tactic.
 -/
 
 example {α β : Type*} {f g : α → β} (h : ∀ x, f x = g x) : f = g := by
-  sorry
+  ext x
+  apply h
+
 
 -- `rfl` can prove an equality `f = f`,
 example : (fun n : ℤ ↦ n + 2) = (fun n : ℤ ↦ n + 2) := rfl
 
 -- but once two functions are not "obviously" equal, you need `ext` to prove it.
 example : (fun n : ℤ ↦ n + 2) = (fun n : ℤ ↦ n + 2 + 0) := by
-  sorry
+  ext n
+  ring
 
 example : (fun n : ℤ ↦ 2 * n + 5) =
     (fun n : ℤ ↦ (n + 2) + (n + 6) - 3) := by
-  sorry
+  ext n
+  ring
 
 
 
