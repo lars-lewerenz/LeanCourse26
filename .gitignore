@@ -42,3 +42,21 @@ docs/_includes/sorries.md
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+## Personal (not part of the course)
+# Anki flashcards for exam prep
+/flashcards/
+# Local Claude Code state
+.claude/settings.local.json
+.claude/.cc-writes/
+
+## OS / editors
+._*
+Thumbs.db
+*.swp
+*~
+.idea/
+## Python
+__pycache__/
+*.py[cod]
+.venv/
