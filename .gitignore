@@ -46,6 +46,8 @@ docs/_includes/sorries.md
 ## Personal (not part of the course)
 # Anki flashcards for exam prep
 /flashcards/
+# Tutor corrections of hand-ins
+/corrections/
 # Local Claude Code state
 .claude/settings.local.json
 .claude/.cc-writes/
