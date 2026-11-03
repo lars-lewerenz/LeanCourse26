@@ -71,7 +71,13 @@ Don't use other lemmas about `min` from Mathlib! -/
 -- Note: the tactic `order` proves both of these immediately
 -- For practice, prove them "by hand"
 lemma exercise_min_comm : min a b = min b a := by
-  sorry
+  apply le_antisymm
+  · apply le_min
+    · apply min_le_right
+    · apply min_le_left
+  · apply le_min
+    · apply min_le_right
+    · apply min_le_left
 
 lemma exercise_min_assoc : min a (min b c) = min (min a b) c := by
   sorry
