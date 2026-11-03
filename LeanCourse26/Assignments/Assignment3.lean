@@ -138,8 +138,13 @@ example : s = univ ↔ ∀ x : α, x ∈ s := by
 /- Prove the law of excluded middle without using `by_cases`/`tauto` or lemmas from the library.
 You will need to use `by_contra` in the proof. -/
 example (p : Prop) : p ∨ ¬ p := by
-  by_contra
-  sorry
+  by_contra h
+  apply h
+  right
+  intro hp
+  apply h
+  left
+  exact hp
 
 /- `α × β` is the cartesian product of the types `α` and `β`.
 Elements of the cartesian product are denoted `(a, b)`, and the projections are `.1` and `.2`.
