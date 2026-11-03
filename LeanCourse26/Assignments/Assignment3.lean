@@ -122,12 +122,23 @@ end Min
 
 /- Prove this equivalence for sets. -/
 example : s = univ ↔ ∀ x : α, x ∈ s := by
-  sorry
+  constructor
+  · intro h x
+    rw [h]
+    trivial
+  · intro h
+    ext x
+    constructor
+    · intro hx
+      apply mem_univ
+    · intro hu
+      apply h
 
 
 /- Prove the law of excluded middle without using `by_cases`/`tauto` or lemmas from the library.
 You will need to use `by_contra` in the proof. -/
 example (p : Prop) : p ∨ ¬ p := by
+  by_contra
   sorry
 
 /- `α × β` is the cartesian product of the types `α` and `β`.
