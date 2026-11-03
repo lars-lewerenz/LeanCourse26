@@ -80,7 +80,27 @@ lemma exercise_min_comm : min a b = min b a := by
     · apply min_le_left
 
 lemma exercise_min_assoc : min a (min b c) = min (min a b) c := by
-  sorry
+  apply le_antisymm
+  · apply le_min
+    · apply le_min
+      · apply min_le_left
+      · apply le_trans
+        · apply min_le_right
+        · apply min_le_left
+    · apply le_trans
+      · apply min_le_right
+      · apply min_le_right
+  · apply le_min
+    · apply le_trans
+      · apply min_le_left
+      · apply min_le_left
+    · apply le_min
+      · apply le_trans
+        · apply min_le_left
+        · apply min_le_right
+      · apply le_trans
+        · apply min_le_right
+        · apply le_rfl
 
 -- Prove the following exercise. You can use mathlib tactics now.
 lemma exercise_min : min (min a (min (min b c) c)) d = min (min a (min d b)) c := by
