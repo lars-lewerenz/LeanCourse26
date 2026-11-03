@@ -163,7 +163,10 @@ example (a a' : α) (b b' : β) (ha : a = a') (hb : b = b') : (a, b) = (a', b') 
 
 /- To practice, show the equality of the following pair. What is the type of these pairs? -/
 example (x y : ℝ) : (132 + 32 * 3, (x + y) ^ 2) = (228, x ^ 2 + 2 * x * y + y ^ 2) := by
-  sorry
+  ext
+  · simp
+  · ring
+  -- The type is ℕ × ℝ, as 132 + 32 * 3 : ℕ
 
 /- Prove a version of the axiom of choice Lean's `Classical.choose`.
 
