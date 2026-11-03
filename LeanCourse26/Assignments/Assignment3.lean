@@ -37,7 +37,16 @@ The arguments `{R : Type*} [CommRing R] {t : R}` mean
 lemma exercise_calc_ring {R : Type*} [CommRing R] {t : R}
     (ht : t ^ 2 - 4 = 0) :
     t ^ 4 + 3 * t ^ 3 - 3 * t ^ 2 - 2 * t - 2 = 10 * t + 2 := by
-  sorry
+  have ht4 : t ^ 2 = 4 := by
+    calc t ^ 2 = t ^ 2 - 4 + 4 := by ring
+      _ = 0 + 4 := by rw [ht]
+      _ = 4 := by rw[zero_add]
+  calc t ^ 4 + 3 * t ^ 3 - 3 * t ^ 2 - 2 * t - 2 = (t ^ 2) * (t ^ 2) + 3 * t * (t ^ 2) - 3 * t * t - 2 * t - 2 := by ring
+    _ = (t ^ 2) * (t ^ 2) + 3 * (t * (t ^ 2) - t ^ 2) - 2 * t - 2 := by ring
+    _ = 4 * 4 + 3 * (t * 4 - 4) - 2 * t - 2 := by rw [ht4]
+    -- _ = 14 + 12 * (t - 1) - 2 * t := by ring
+    -- _ = 14 + 12 * t - 12 - 2 * t := by ring
+    _ = 10 * t + 2 := by ring
 
 end calculations
 
