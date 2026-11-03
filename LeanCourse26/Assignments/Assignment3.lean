@@ -1,4 +1,4 @@
--- Name: <insert your name here>
+-- Name: Lars Lewerenz
 
 module
 
@@ -24,7 +24,12 @@ section calculations
 
 /- Prove this using a calculation. -/
 lemma exercise_calc_real {t : ℝ} (ht : t ≥ 10) : t ^ 2 - 3 * t - 17 ≥ 5 := by
-  sorry
+  calc t ^ 2 - 3 * t - 17 = t * t - 3 * t - 17 := by rw [pow_two]
+    _ = t * (t - 3) - 17 := by ring
+    _ ≥ 10 * (10 - 3) - 17 := by gcongr
+    -- _ = 10 * 7 - 17 := by ring
+    -- _ = 53 := by ring
+    _ ≥ 5 := by norm_num
 
 /- Prove this using a calculation.
 The arguments `{R : Type*} [CommRing R] {t : R}` mean
@@ -184,4 +189,3 @@ lemma exercise_cantor (α : Type*) (f : α → Set α) : ¬ Surjective f := by
   sorry
 
 end Surjectivity
-
