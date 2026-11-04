@@ -245,7 +245,19 @@ example {I : Type*} (f : α → β) (A : I → Set α) : (f '' ⋃ i, A i) = ⋃
 
 /- Prove this without using lemmas from Mathlib. -/
 example {a b c d : ℝ} (hab : a < b) : Icc a b ⊆ Ioo c d ↔ c < a ∧ b < d := by
-  sorry
+  constructor
+  · intro h
+    constructor
+    · have ha : a ∈ Icc a b := by
+        constructor
+        · rfl
+        · sorry
+      have ha' : a ∈ Ioo c d := by
+        sorry
+      sorry
+    · sorry
+  · intro h
+    sorry
 
 /- Prove this by finding relevant lemmas in Mathlib. -/
 lemma preimage_square :
