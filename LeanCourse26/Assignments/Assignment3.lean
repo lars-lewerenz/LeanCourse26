@@ -225,7 +225,23 @@ lemma image_and_intersection {α β : Type*} (f : α → β) (s : Set α) (t : S
 -- Note: we still use the `simp` tactic... which is using mathlib, but only in a mild way.
 -- That's a reasonable compromise for now.
 example {I : Type*} (f : α → β) (A : I → Set α) : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
-  sorry
+  ext y
+  constructor
+  · intro h
+    obtain ⟨x, hx, rfl⟩ := h
+    simp at hx
+    obtain ⟨s, hs⟩ := hx
+    simp
+    use s
+    use x
+  · intro h
+    simp at h
+    obtain ⟨i, x, hx, rfl⟩ := h
+    simp
+    use x
+    constructor
+    · use i
+    · rfl
 
 /- Prove this without using lemmas from Mathlib. -/
 example {a b c d : ℝ} (hab : a < b) : Icc a b ⊆ Ioo c d ↔ c < a ∧ b < d := by
