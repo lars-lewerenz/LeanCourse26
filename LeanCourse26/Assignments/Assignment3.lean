@@ -205,7 +205,21 @@ end Set
 /- Prove this without using lemmas from Mathlib. -/
 lemma image_and_intersection {α β : Type*} (f : α → β) (s : Set α) (t : Set β) :
     f '' s ∩ t = f '' (s ∩ f ⁻¹' t) := by
-  sorry
+  ext y
+  constructor
+  · intro h
+    obtain ⟨⟨x, hxs, rfl⟩, hyt⟩ := h
+    use x
+    constructor
+    · constructor
+      · apply hxs
+      · exact hyt
+    · rfl
+  · intro hx
+    obtain ⟨x, ⟨hs, hfs⟩, rfl⟩ := hx
+    constructor
+    · use x
+    · sorry
 
 /- Prove this without using lemmas from Mathlib. -/
 -- Note: we still use the `simp` tactic... which is using mathlib, but only in a mild way.
