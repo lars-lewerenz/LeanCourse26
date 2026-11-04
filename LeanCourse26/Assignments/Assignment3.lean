@@ -219,7 +219,7 @@ lemma image_and_intersection {α β : Type*} (f : α → β) (s : Set α) (t : S
     obtain ⟨x, ⟨hs, hfs⟩, rfl⟩ := hx
     constructor
     · use x
-    · sorry
+    · exact hfs
 
 /- Prove this without using lemmas from Mathlib. -/
 -- Note: we still use the `simp` tactic... which is using mathlib, but only in a mild way.
