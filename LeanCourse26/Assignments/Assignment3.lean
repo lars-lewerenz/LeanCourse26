@@ -247,15 +247,21 @@ example {I : Type*} (f : α → β) (A : I → Set α) : (f '' ⋃ i, A i) = ⋃
 example {a b c d : ℝ} (hab : a < b) : Icc a b ⊆ Ioo c d ↔ c < a ∧ b < d := by
   constructor
   · intro h
+    have ha : a ∈ Icc a b := by
+      constructor
+      · rfl
+      · linarith
+    have hb : b ∈ Ioo c d := by
+      apply h
+      constructor -- this is actually 'trivial', but I don't want to rely on that :D
+      · linarith
+      · rfl
     constructor
-    · have ha : a ∈ Icc a b := by
-        constructor
-        · rfl
-        · sorry
-      have ha' : a ∈ Ioo c d := by
-        sorry
-      sorry
-    · sorry
+    · apply h at ha
+      obtain ⟨x, hx⟩ := ha
+      use x
+    · obtain ⟨hcb, hbd⟩ := hb
+      exact hbd
   · intro h
     sorry
 
