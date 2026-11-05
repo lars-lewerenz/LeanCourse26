@@ -320,7 +320,14 @@ to the left and the right, the result will still be a
 surjective function. The `ring` tactic will be very useful here! -/
 lemma surjective_linear (hf : SurjectiveFunction f) :
     SurjectiveFunction (fun x ↦ 2 * f (3 * (x + 4)) + 1) := by
-  sorry
+  unfold SurjectiveFunction
+  intro y
+  simp
+  obtain ⟨z, hz⟩ := hf ((y - 1) / 2)
+  use (z / 3) - 4
+  ring_nf
+  rw [hz]
+  ring
 
 /- Let's prove Cantor's theorem:
 there is no surjective function from any set to its power set.
