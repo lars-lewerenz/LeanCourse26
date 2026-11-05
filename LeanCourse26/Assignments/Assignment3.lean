@@ -270,11 +270,21 @@ example {a b c d : ℝ} (hab : a < b) : Icc a b ⊆ Ioo c d ↔ c < a ∧ b < d 
     · linarith
     · linarith
 
+#check sq_le_sq
+
+#loogle _ ≤ |_| ↔ _
 
 /- Prove this by finding relevant lemmas in Mathlib. -/
 lemma preimage_square :
     (fun x : ℝ ↦ x ^ 2) ⁻¹' {y | y ≥ 16} = { x : ℝ | x ≤ -4 } ∪ { x : ℝ | x ≥ 4 } := by
-  sorry
+  simp
+  ext x
+  simp
+  have sqr16 : (16 : ℝ) = 4 ^ 2 := by ring
+  rw [sqr16]
+  rw [sq_le_sq]
+  rw [le_abs']
+  simp
 
 section Surjectivity
 
