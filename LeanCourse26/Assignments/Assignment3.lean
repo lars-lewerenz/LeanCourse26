@@ -258,12 +258,18 @@ example {a b c d : ℝ} (hab : a < b) : Icc a b ⊆ Ioo c d ↔ c < a ∧ b < d 
       · rfl
     constructor
     · apply h at ha
-      obtain ⟨x, hx⟩ := ha
-      use x
+      obtain ⟨hca, had⟩ := ha
+      exact hca
     · obtain ⟨hcb, hbd⟩ := hb
       exact hbd
-  · intro h
-    sorry
+  · intro h x hx
+    -- simp
+    obtain ⟨hax, hxb⟩ := hx
+    obtain ⟨hca, hbd⟩ := h
+    constructor
+    · linarith
+    · linarith
+
 
 /- Prove this by finding relevant lemmas in Mathlib. -/
 lemma preimage_square :
