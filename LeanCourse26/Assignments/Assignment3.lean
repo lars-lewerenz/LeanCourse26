@@ -335,6 +335,16 @@ Hint: use `let R := {x | x ∉ f x}` to consider the set `R` of elements `x`
 that are not in `f x`
 -/
 lemma exercise_cantor (α : Type*) (f : α → Set α) : ¬ Surjective f := by
-  sorry
+  intro h
+  let R := {x | x ∉ f x}
+  obtain ⟨a, ha⟩ := h R
+  have h1 : a ∉ f a := by
+    intro haf
+    sorry
+  have h2 : a ∈ f a := by
+    rw [ha]
+    sorry
+  trivial
+
 
 end Surjectivity
