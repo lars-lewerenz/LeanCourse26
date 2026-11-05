@@ -301,7 +301,19 @@ example : (g ∘ f) x = g (f x) := by simp
 
 lemma surjective_composition (hf : SurjectiveFunction f) :
     SurjectiveFunction (g ∘ f) ↔ SurjectiveFunction g := by
-  sorry
+  unfold SurjectiveFunction
+  constructor
+  · intro hgf y
+    obtain ⟨x, hx⟩ := hgf y
+    use f x
+    apply hx
+  · intro hg y
+    obtain ⟨x, hx⟩ := hg y
+    obtain ⟨a, ha⟩ := hf x
+    use a
+    simp
+    rw [ha]
+    apply hx
 
 /- When composing a surjective function by a linear function
 to the left and the right, the result will still be a
