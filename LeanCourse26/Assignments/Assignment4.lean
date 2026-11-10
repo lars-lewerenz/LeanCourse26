@@ -188,12 +188,32 @@ lemma contradictory_definition (f : ℕ → ℕ) (h : ∀ n : ℕ, f n = 1 + f (
 -- use the hypothesis to study `f 0`: can you relate it to `f 1`, `f 2`, etc.?
 -- Perhaps you can formulate a hypothesis and prove it by induction.
 
+open Finset
+
+-- following Lecture 7
+lemma sum_gauss (n : ℕ) :
+    ∑ i ∈ Finset.range (n + 1), (i : ℚ) = n * (n + 1) / 2 := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+
+    calc ∑ i ∈ range (n + 1 + 1), (i : ℚ) =
+      ∑ i ∈ range (n + 1), (i : ℚ) + (n + 1) := by rw [sum_range_succ]; norm_cast
+      _ = (n * (n + 1) / 2) + (n + 1 : ℚ) := by rw [ih]
+      _ = (↑(n + 1) : ℚ) * (↑(n + 1) + 1) / 2 := by push_cast; ring
+
 
 /- Prove by induction that `∑_{i = 0}^{n} i^3 = (∑_{i=0}^{n} i) ^ 2`. -/
 open Finset in
 lemma sum_cube_eq_sq_sum (n : ℕ) :
     (∑ i ∈ Finset.range (n + 1), (i : ℚ) ^ 3) = (∑ i ∈ Finset.range (n + 1), (i : ℚ)) ^ 2 := by
-  sorry
+  rw [sum_gauss]
+  induction n with
+  | zero => ring
+  | succ n ih =>
+    rw [sum_range_succ, ih]
+    norm_num
+    ring
 
 end
 
