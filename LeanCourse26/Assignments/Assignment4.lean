@@ -33,7 +33,9 @@ example (n : ℤ) (h : (n : ℚ) = 3) : 3 = n := by
   rw [h]
 
 example (n m : ℕ) (h : (n : ℚ) + 3 ≤ 2 * m) : (n : ℝ) + 1 < 2 * m := by
-  sorry
+  norm_cast at h
+  norm_cast
+  linarith
 
 example (n m : ℕ) (h : (n : ℚ) = m ^ 2 - 2 * m) : (n : ℝ) + 1 = (m - 1) ^ 2 := by
   sorry
