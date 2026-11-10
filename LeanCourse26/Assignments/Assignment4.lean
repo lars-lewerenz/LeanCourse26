@@ -56,10 +56,10 @@ example (n m : ℕ) (hn : 2 ∣ n) (h : n / 2 = m) : (n : ℚ) / 2 = m := by
 
 
 example (q q' : ℚ) (h : q ≤ q') : exp q ≤ exp q' := by
-  sorry
+  gcongr
 
 example (n : ℤ) (h : 0 < n) : 0 < Real.sqrt n := by
-  sorry
+  positivity
 
 end casts
 
