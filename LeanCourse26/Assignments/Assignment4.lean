@@ -237,11 +237,14 @@ def op (a b : Point4) : Point4 where
 
 -- Prove that op is associative.
 lemma op_assoc {a b c : Point4} : op (op a b) c = op a (op b c) := by
-  sorry
+  unfold op
+  ext
+  all_goals (simp; ring)
 
 -- Investigate whether op is commutative: prove one of the following.
 lemma op_comm : ∀ a b : Point4, op a b = op b a := by
   sorry
+
 
 lemma not_op_comm : ¬(∀ a b : Point4, op a b = op b a) := by
   sorry
