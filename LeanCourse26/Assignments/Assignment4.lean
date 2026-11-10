@@ -38,7 +38,9 @@ example (n m : ℕ) (h : (n : ℚ) + 3 ≤ 2 * m) : (n : ℝ) + 1 < 2 * m := by
   linarith
 
 example (n m : ℕ) (h : (n : ℚ) = m ^ 2 - 2 * m) : (n : ℝ) + 1 = (m - 1) ^ 2 := by
-  sorry
+  have hr : (n : ℝ) = m ^ 2 - 2 * m := by exact_mod_cast h
+  rw [hr]
+  ring
 
 example (n m : ℕ) : (n : ℝ) < (m : ℝ) ↔ n < m := by
   sorry
