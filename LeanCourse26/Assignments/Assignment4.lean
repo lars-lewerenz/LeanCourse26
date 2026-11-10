@@ -1,4 +1,4 @@
--- Name: <insert your name here>
+-- Name: Lars Lewerenz
 
 module
 
@@ -29,7 +29,8 @@ section casts
 
 /- The following exercises are to practice with casts. -/
 example (n : ℤ) (h : (n : ℚ) = 3) : 3 = n := by
-  sorry
+  norm_cast at h
+  rw [h]
 
 example (n m : ℕ) (h : (n : ℚ) + 3 ≤ 2 * m) : (n : ℝ) + 1 < 2 * m := by
   sorry
