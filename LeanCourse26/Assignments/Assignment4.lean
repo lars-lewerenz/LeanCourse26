@@ -43,10 +43,17 @@ example (n m : ℕ) (h : (n : ℚ) = m ^ 2 - 2 * m) : (n : ℝ) + 1 = (m - 1) ^ 
   ring
 
 example (n m : ℕ) : (n : ℝ) < (m : ℝ) ↔ n < m := by
-  sorry
+  norm_cast
 
 example (n m : ℕ) (hn : 2 ∣ n) (h : n / 2 = m) : (n : ℚ) / 2 = m := by
-  sorry
+  obtain ⟨y, hy, rfl⟩ := hn
+  simp
+  rw [← h]
+  simp
+
+
+
+
 
 example (q q' : ℚ) (h : q ≤ q') : exp q ≤ exp q' := by
   sorry
