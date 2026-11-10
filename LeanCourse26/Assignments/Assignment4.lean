@@ -247,7 +247,9 @@ lemma op_comm : ∀ a b : Point4, op a b = op b a := by
 
 
 lemma not_op_comm : ¬(∀ a b : Point4, op a b = op b a) := by
-  sorry
+  by_contra h
+  specialize h (⟨1, 0, 0, 1⟩) (⟨0, 1, 1, 0⟩)
+  simp [op] at h
 
 
 -- For the latter, you may the following helpful.
