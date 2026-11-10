@@ -172,7 +172,16 @@ section
 -- In this case, you can actually derive a contradiction from a function with this property.
 -- Do so in the following exercise.
 lemma contradictory_definition (f : ℕ → ℕ) (h : ∀ n : ℕ, f n = 1 + f (n + 1)) : False := by
-  sorry
+  have key : ∀ n,  f 0 = n + 1 + f (n + 1) := by
+    intro n
+    induction n with
+    | zero => simp; apply h
+    | succ n ih =>
+      rw [h (n + 1)] at ih
+      rw [ih]
+      ring
+  specialize key (f 0)
+  lia
 
 
 -- Hint for the exercise `contradictory_definition`:
