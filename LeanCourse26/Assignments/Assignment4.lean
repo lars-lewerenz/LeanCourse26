@@ -280,13 +280,19 @@ Then state and prove the lemma that for any element of a strict bipointed type w
 
 -- give the definition here
 
-structure StrictBipointed where
+structure StrictBipoint where
   T : Type*
   x_1 : T
   x_2 : T
   uneq : x_1 ≠ x_2
 
-lemma 
+lemma StrictBipoint.uneq_to_one (bp : StrictBipoint) (z : bp.T) : z ≠ bp.x_1 ∨ z ≠ bp.x_2 := by
+  by_cases h : z = bp.x_1
+  · right
+    rw [h]
+    apply bp.uneq
+  · left
+    exact h
 
 -- state and prove the lemma here
 
