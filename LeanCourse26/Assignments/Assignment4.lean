@@ -243,7 +243,7 @@ lemma op_assoc {a b c : Point4} : op (op a b) c = op a (op b c) := by
 
 -- Investigate whether op is commutative: prove one of the following.
 lemma op_comm : ∀ a b : Point4, op a b = op b a := by
-  sorry -- false, see below
+  sorry -- false, see not_op_comm
 
 
 lemma not_op_comm : ¬(∀ a b : Point4, op a b = op b a) := by
@@ -286,6 +286,7 @@ structure StrictBipoint where
   x_2 : T
   uneq : x_1 ≠ x_2
 
+-- state and prove the lemma here
 lemma StrictBipoint.uneq_to_one (bp : StrictBipoint) (z : bp.T) : z ≠ bp.x_1 ∨ z ≠ bp.x_2 := by
   by_cases h : z = bp.x_1
   · right
@@ -294,7 +295,6 @@ lemma StrictBipoint.uneq_to_one (bp : StrictBipoint) (z : bp.T) : z ≠ bp.x_1 �
   · left
     exact h
 
--- state and prove the lemma here
 
 
 end Bipointed
