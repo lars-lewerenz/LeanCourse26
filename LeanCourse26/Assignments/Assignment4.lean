@@ -243,7 +243,7 @@ lemma op_assoc {a b c : Point4} : op (op a b) c = op a (op b c) := by
 
 -- Investigate whether op is commutative: prove one of the following.
 lemma op_comm : ∀ a b : Point4, op a b = op b a := by
-  sorry
+  sorry -- false, see below
 
 
 lemma not_op_comm : ¬(∀ a b : Point4, op a b = op b a) := by
@@ -280,6 +280,13 @@ Then state and prove the lemma that for any element of a strict bipointed type w
 
 -- give the definition here
 
+structure StrictBipointed where
+  T : Type*
+  x_1 : T
+  x_2 : T
+  uneq : x_1 ≠ x_2
+
+lemma 
 
 -- state and prove the lemma here
 
